@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" id="answer" />
+        <button id="send-answer">제출</button>
+
+        <div id="gift"><span id="num">5</span> 초 이내 구매시 사은품 증정</div>
+    </body>
+</html>
+
+<script>
+    let cnt = 5;
+
+    const timer = setInterval(() => {
+        cnt -= 1;
+        document.querySelector("#num").innerHTML = cnt;
+
+        if (cnt === 0) {
+            clearInterval(timer);
+            document.querySelector("#gift").style.display = "none";
+        }
+    }, 1000);
+    
+    var count = 0;
+
+    document.querySelector("#send-answer").addEventListener("click", () => {
+        count += 1;
+
+        var 유저답안 = document.querySelector("#answer").value;
+
+        if (유저답안 == "1335") {
+            alert("성공");
+        } else if (count >= 3 && 유저답안 != "1335") {
+            alert("멍청아");
+        }
+    });
+
+    function game369(value) {
+        if (value % 3 == 0 || value % 6 == 0 || value % 9 == 0) {
+            console.log("통과");
+        }
+    }
+
+    function newGame(value) {
+        if (value % 3 == 0 || value % 6 == 0) {
+            console.log("박수");
+        } else if (value % 9 == 0) {
+            console.log("박수");
+        } else {
+            console.log("통과");
+        }
+    }
+
+    function newNewGame() {}
+
+    let age;
+    const region = "suwon";
+</script>
