@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link href="layout2.css" , rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <div class="navbar-brand">JSShop</div>
+            <div class="ongoing-status ongoing-status-width"></div>
+        </div>
+
+        <div>
+            <br />
+        </div>
+
+        <div
+            class="lorem"
+            style="width: 200px; height: 100px; overflow-y: scroll"
+        >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae
+            voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa
+            itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi
+            quae consectetur praesentium exercitationem.
+        </div>
+
+        <div style="height: 2000px"></div>
+
+        <script>
+            window.addEventListener("scroll", () => {
+                if (window.scrollY >= 100) {
+                    document.querySelector(".navbar-brand").style.fontSize =
+                        "20px";
+                } else {
+                    document.querySelector(".navbar-brand").style.fontSize =
+                        "50px";
+                }
+            });
+
+            window.addEventListener("scroll", () => {
+                let totalScrollAmount =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                let currScrollY = window.scrollY;
+                let scrollPercent = (currScrollY / totalScrollAmount) * 100;
+
+                document.querySelector(
+                    ".ongoing-status-width",
+                ).style.width = `${scrollPercent}%`;
+            });
+
+            document.querySelector(".lorem").addEventListener("scroll", () => {
+                let lorem = document.querySelector(".lorem");
+                if (
+                    lorem.scrollTop + lorem.clientHeight >
+                    lorem.scrollHeight - 10
+                ) {
+                    alert("모두 보셨군요?");
+                }
+            });
+        </script>
+    </body>
+</html>
