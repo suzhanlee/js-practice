@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="layout3.css", rel="stylesheet">
-</head>
-<body>
-
-    <form class="container my-5 form-group">
-        <p>상품선택</p>
-        <select class="form-select mt-2">
-          <option class="item">모자</option>
-          <option class="item">셔츠</option>
-          <option class="item">바지</option>
-        </select>
-    
-        <div class = "size-select">
-            <p>사이즈 선택</p>
-            <select>
-                <option class="size">95</option>
-                <option class="size">100</option>
-            </select>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link href="layout4.css" , rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row"></div>
+            <div style="clear: both;"></div>
         </div>
-    </form>
-    
-    <script>
-    
-        document.querySelector(".form-select").addEventListener("input", (e) => {
-            let sizeSelcter = document.querySelector(".size-select")
-            if(e.currentTarget.value == "셔츠") { // this.value == "셔츠"
-                sizeSelcter.style.display = "block";
-            } else if(e.currentTarget.value == "모자") {
-                sizeSelcter.style.display = "none";
-            } else if(e.currentTarget.value == "바지") {
-                document.querySelectorAll(".size-select .size")[0].innerHTML = 28;
-                document.querySelectorAll(".size-select .size")[1].innerHTML = 30;
-                sizeSelcter.style.display = "block";
-            }
-        })
+        <button class = "price-button", id="price">가격 조정 버튼</button>
 
+        <script>
+            let products = [];
 
-    
-    </script>
-    
-</body>
+            $.get("https://codingapple1.github.io/js/more1.json").done(
+                (data) => {
+                    products = data;
+                    data.forEach((data) => {
+                        var template = `<div class="col-sm-4">
+                                            <img src="https://via.placeholder.com/600" class="w-100">
+                                            <h5>${data.title}</h5>
+                                            <p>가격 : ${data.price}</p>
+                                        </div>`;
+
+                        $(".row").append(template);
+                    });
+                },
+            );
+        </script>
+
+        <script>
+            $("#price").click(() => {
+                products.sort((a, b) => {
+                    return a.price - b.price;
+                });
+
+                $(".row").html("");
+
+                products.forEach((proudct) => {
+                    var template = `<div class="col-sm-4">
+                                    <img src="https://via.placeholder.com/600" class="w-100">
+                                    <h5>${proudct.title}</h5>
+                                    <p>가격 : ${proudct.price}</p>
+                                </div>`;
+                    $(".row").append(template);
+                });
+            });
+        </script>
+    </body>
 </html>
-

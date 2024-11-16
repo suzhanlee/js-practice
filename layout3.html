@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="layout3.css", rel="stylesheet">
+</head>
+<body>
+
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+          <option class="item">모자</option>
+          <option class="item">셔츠</option>
+          <option class="item">바지</option>
+        </select>
+    
+        <div class = "size-select">
+            <p>사이즈 선택</p>
+            <select>
+                <option class="size">95</option>
+                <option class="size">100</option>
+            </select>
+        </div>
+    </form>
+    
+    <script>
+    
+        document.querySelector(".form-select").addEventListener("input", (e) => {
+            let sizeSelcter = document.querySelector(".size-select")
+            if(e.currentTarget.value == "셔츠") { // this.value == "셔츠"
+                sizeSelcter.style.display = "block";
+                document.querySelectorAll(".size-select .size")[0].innerHTML = 95;
+                document.querySelectorAll(".size-select .size")[1].innerHTML = 100;
+            } else if(e.currentTarget.value == "모자") {
+                sizeSelcter.style.display = "none";
+            } else if(e.currentTarget.value == "바지") {
+                document.querySelectorAll(".size-select .size")[0].innerHTML = 28;
+                document.querySelectorAll(".size-select .size")[1].innerHTML = 30;
+                sizeSelcter.style.display = "block";
+            }
+        })
+
+
+    
+    </script>
+    
+</body>
+</html>
+
