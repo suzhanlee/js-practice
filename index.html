@@ -60,15 +60,14 @@
                     .siblings(".title")
                     .text();
 
-                let items = JSON.parse(localStorage.getItem("cart"));
+                let parsedItems = JSON.parse(localStorage.getItem("cart"));
 
-                if (!items) {
-                    let cartItems = [];
-                    cartItems.push(productName);
-                    localStorage.setItem("cart", JSON.stringify(cartItems));
+                if (!parsedItems) {
+                    parsedItems = [productName];
+                    localStorage.setItem("cart", JSON.stringify(parsedItems));
                 } else {
                     items.push(productName);
-                    localStorage.setItem("cart", JSON.stringify(items));
+                    localStorage.setItem("cart", JSON.stringify(parsedItems));
                 }
             });
         </script>

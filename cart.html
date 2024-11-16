@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link href="layout4.css" , rel="stylesheet" />
+    </head>
+    <body>
+        <div>장바구니</div>
+        <button class="cart">장바구니 보기 버튼</button>
+        <div class="row"></div>
+
+        <script>
+            console.log(JSON.parse(localStorage.getItem("cart")));
+
+            $(".cart").click(() => {
+                let cartItems = JSON.parse(localStorage.getItem("cart"));
+                if (cartItems) {
+                    cartItems.forEach((item) => {
+                        let itemHtml = `<div class = "col-sm-4"> ${item.value} </div>`;
+                        $(".row").append(itemHtml);
+                    });
+                }
+            });
+        </script>
+    </body>
 </html>
