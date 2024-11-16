@@ -13,6 +13,7 @@
         <select class="form-select mt-2">
           <option class="item">모자</option>
           <option class="item">셔츠</option>
+          <option class="item">바지</option>
         </select>
     
         <div class = "size-select">
@@ -27,12 +28,19 @@
     <script>
     
         document.querySelector(".form-select").addEventListener("input", (e) => {
+            let sizeSelcter = document.querySelector(".size-select")
             if(e.currentTarget.value == "셔츠") { // this.value == "셔츠"
-                document.querySelector(".size-select").style.display = "block";
-            } else {
-                document.querySelector(".size-select").style.display = "none";
+                sizeSelcter.style.display = "block";
+            } else if(e.currentTarget.value == "모자") {
+                sizeSelcter.style.display = "none";
+            } else if(e.currentTarget.value == "바지") {
+                document.querySelectorAll(".size-select .size")[0].innerHTML = 28;
+                document.querySelectorAll(".size-select .size")[1].innerHTML = 30;
+                sizeSelcter.style.display = "block";
             }
         })
+
+
     
     </script>
     
