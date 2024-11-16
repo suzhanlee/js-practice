@@ -10,9 +10,9 @@
     <body>
         <div class="container">
             <div class="row"></div>
-            <div style="clear: both;"></div>
+            <div style="clear: both"></div>
         </div>
-        <button class = "price-button", id="price">가격 조정 버튼</button>
+        <button class="price-button" , id="price">가격 조정 버튼</button>
 
         <script>
             let products = [];
@@ -23,8 +23,9 @@
                     data.forEach((data) => {
                         var template = `<div class="col-sm-4">
                                             <img src="https://via.placeholder.com/600" class="w-100">
-                                            <h5>${data.title}</h5>
+                                            <h5 class="title">${data.title}</h5>
                                             <p>가격 : ${data.price}</p>
+                                            <button class = "product-description">상세 정보</button>
                                         </div>`;
 
                         $(".row").append(template);
@@ -41,14 +42,34 @@
 
                 $(".row").html("");
 
-                products.forEach((proudct) => {
+                products.forEach((product) => {
                     var template = `<div class="col-sm-4">
                                     <img src="https://via.placeholder.com/600" class="w-100">
-                                    <h5>${proudct.title}</h5>
-                                    <p>가격 : ${proudct.price}</p>
+                                    <h5 class = "title">${product.title}</h5>
+                                    <p>가격 : ${product.price}</p>
+                                    <button class = "product-description">상세 정보</button>
                                 </div>`;
                     $(".row").append(template);
                 });
+            });
+        </script>
+
+        <script>
+            $(document).on("click", ".product-description", function () {
+                let productName = $(this)
+                    .siblings(".title")
+                    .text();
+
+                let items = JSON.parse(localStorage.getItem("cart"));
+
+                if (!items) {
+                    let cartItems = [];
+                    cartItems.push(productName);
+                    localStorage.setItem("cart", JSON.stringify(cartItems));
+                } else {
+                    items.push(productName);
+                    localStorage.setItem("cart", JSON.stringify(items));
+                }
             });
         </script>
     </body>
