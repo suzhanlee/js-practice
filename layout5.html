@@ -34,20 +34,38 @@
         </div>
 
         <script>
-            $.get("http://localhost:5500/store.json").done((product) => {
-                let parsedProduct = product.products;
+            let productDatas;
 
-                parsedProduct.forEach((p) => {
+            function displayProducts(products) {
+                $(".product-container").empty(); 
+
+                products.forEach((p) => {
                     let template = `<div class="product-box">
                                         <img src="/${p.photo}" class="product-img">
-                                        <div>${p.title}</div>
+                                        <div class="product-title">${p.title}</div>
                                         <div>${p.brand}</div>
-                                        <div>가격 : ${p.price}</div>
+                                        <div>가격 : ${p.price}원</div>
                                         <button class="product-btn">담기</button>
                                     </div>`;
-
                     $(".product-container").append(template);
                 });
+            }
+
+            $.get("http://localhost:5500/store.json").done((product) => {
+                productDatas = product.products;
+                displayProducts(productDatas);
+            });
+
+            $(".keyword-box").on("input", (e) => {
+                let keyword = e.target.value.trim();
+
+                if (keyword === "") {
+                    displayProducts(productDatas);
+                    return;
+                }
+
+                let filteredProducts = productDatas.filter((p) => p.title.includes(keyword));
+                displayProducts(filteredProducts);
             });
         </script>
     </body>
