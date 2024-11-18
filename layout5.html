@@ -27,7 +27,13 @@
                 <div>
                     <div class="cart-box">
                         <div class="cart-letter">장바구니</div>
-                        <div class="drag-box">여기로 드래그</div>
+                        <div
+                            class="drag-box"
+                            ondrop="drop(event)"
+                            ondragover="allowDrop(event)"
+                        >
+                            여기로 드래그
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,10 +43,10 @@
             let productDatas;
 
             function displayProducts(products) {
-                $(".product-container").empty(); 
+                $(".product-container").empty();
 
                 products.forEach((p) => {
-                    let template = `<div class="product-box">
+                    let template = `<div class="product-box" draggable="true" ondragstart="drag(event)" id = "product-${p.id}">
                                         <img src="/${p.photo}" class="product-img">
                                         <div class="product-title">${p.title}</div>
                                         <div>${p.brand}</div>
@@ -64,9 +70,65 @@
                     return;
                 }
 
-                let filteredProducts = productDatas.filter((p) => p.title.includes(keyword));
+                let filteredProducts = productDatas.filter((p) =>
+                    p.title.includes(keyword),
+                );
                 displayProducts(filteredProducts);
             });
+
+            function allowDrop(e) {
+                e.preventDefault();
+            }
+
+            function drag(e) {
+                e.dataTransfer.setData("text", e.target.id);
+            }
+
+            function createCartProduct(element) {
+                let cartProduct = element.cloneNode(true);
+
+                let quantityDiv = document.createElement("div");
+                quantityDiv.className = "quantity";
+                quantityDiv.textContent = "1";
+                cartProduct.appendChild(quantityDiv);
+
+                let removeBtn = cartProduct.querySelector(".product-btn");
+                removeBtn.innerText = "제거";
+                removeBtn.onclick = function () {
+                    cartProduct.remove();
+
+                    let dragBox = document.querySelector(".drag-box");
+                    if (dragBox.children.length === 0) {
+                        dragBox.innerText = "여기로 드래그";
+                    }
+                };
+
+                return cartProduct;
+            }
+
+            function drop(e) {
+                e.preventDefault();
+                let data = e.dataTransfer.getData("text");
+                let draggedElement = document.getElementById(data);
+
+                if (e.target.innerText === "여기로 드래그") {
+                    e.target.innerText = "";
+                }
+
+                let productTitle = draggedElement.querySelector('.product-title').textContent;
+                let existingProduct = Array.from(e.target.children).find(item => 
+                    item.querySelector('.product-title')?.textContent === productTitle
+                );
+
+                if (existingProduct) {
+                    let quantityDiv = existingProduct.querySelector('.quantity');
+                    let currentQuantity = parseInt(quantityDiv.textContent);
+                    quantityDiv.textContent = (currentQuantity + 1).toString();
+                } else {
+                    let cartProduct = createCartProduct(draggedElement);
+                    e.target.appendChild(cartProduct);
+                }
+            }
         </script>
     </body>
 </html>
