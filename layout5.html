@@ -17,15 +17,19 @@
             </div>
             <div style="clear: both"></div>
             <div class="main-box">
-                <form action="">
-                    <input class="keyword-box" placeholder="검색어입력" />
-                </form>
-                <div class="product-container"></div>
-            </div>
-            <div style="clear: both"></div>
-            <div>
-                <div>장바구니</div>
-                <div>여기로 드래그</div>
+                <div>
+                    <form action="">
+                        <input class="keyword-box" placeholder="검색어입력" />
+                    </form>
+                    <div class="product-container"></div>
+                </div>
+                <div style="clear: both"></div>
+                <div>
+                    <div class="cart-box">
+                        <div class="cart-letter">장바구니</div>
+                        <div class="drag-box">여기로 드래그</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -39,7 +43,7 @@
                                         <div>${p.title}</div>
                                         <div>${p.brand}</div>
                                         <div>가격 : ${p.price}</div>
-                                        <button>담기</button>
+                                        <button class="product-btn">담기</button>
                                     </div>`;
 
                     $(".product-container").append(template);
