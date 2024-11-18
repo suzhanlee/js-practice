@@ -1,0 +1,46 @@
+.navbar {
+    background-color: black;
+    color: white;
+    height: 40px;
+}
+
+.bar-menu {
+    float: left;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+}
+
+.none-margin {
+    margin: 0;
+}
+
+a.bar-menu {
+    color: white;  
+    text-decoration: none; 
+}
+
+.main-box {
+    
+}
+
+.keyword-box {
+    height: 25px;
+}
+
+.product-container {
+    
+}
+
+.product-box {
+    width: 200px;
+    height: 1000px;
+    float: left;
+    background-color: white;
+    padding: 5px;
+}
+
+.product-img {
+    width: 180px;
+    height: 150px;
+}

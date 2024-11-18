@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link href="layout5.css" , rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <div class="navbar">
+                <h2 class="bar-menu none-margin">집꾸미기</h2>
+                <a href="/home" class="bar-menu">Home</a>
+                <a href="/store" class="bar-menu">스토어</a>
+                <a class="bar-menu">시공견적</a>
+            </div>
+            <div style="clear: both"></div>
+            <div class="main-box">
+                <form action="">
+                    <input class="keyword-box" placeholder="검색어입력" />
+                </form>
+                <div class="product-container"></div>
+            </div>
+            <div style="clear: both"></div>
+            <div>
+                <div>장바구니</div>
+                <div>여기로 드래그</div>
+            </div>
+        </div>
+
+        <script>
+            $.get("http://localhost:5500/store.json").done((product) => {
+                let parsedProduct = product.products;
+
+                parsedProduct.forEach((p) => {
+                    let template = `<div class="product-box">
+                                        <img src="/${p.photo}" class="product-img">
+                                        <div>${p.title}</div>
+                                        <div>${p.brand}</div>
+                                        <div>가격 : ${p.price}</div>
+                                        <button>담기</button>
+                                    </div>`;
+
+                    $(".product-container").append(template);
+                });
+            });
+        </script>
+    </body>
+</html>
